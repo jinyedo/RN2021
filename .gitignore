@@ -1,3 +1,6 @@
+ios
+__tests__
+
 # OSX
 #
 .DS_Store
@@ -57,3 +60,4 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
