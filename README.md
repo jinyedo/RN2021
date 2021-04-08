@@ -1,15 +1,5 @@
 # 0326
 
-### 컴포넌트 생명주기 - life cycle method
-```
-1. constructor() - 생성자 | 제일먼저 실행됨
-2. componentDidMount() - render() 다음으로 실행
-3. 실행순서: constructor() -> render() -> componentDidMount() 
-
-4. componentDidUpdate() - 화면 업데이트시 실행 
-5. componentWillMount() - 컴포넌트 종료시 실행
-```
-
 ### props 사용하기
 ```
 [ props ]
@@ -53,7 +43,7 @@ ex)
   }
 ```
 
-### onPredd() : 클릭 이벤트 처리
+### onPress() : 클릭 이벤트 처리
 ```
 ex) 클릭시 updateYear() 호출
 <Text onPress={() => this.updateYear()}>
@@ -61,5 +51,25 @@ ex) 클릭시 updateYear() 호출
 </Text>
 ```
 
-
 ---
+
+# 0402
+
+### 컴포넌트 생명주기 - life cycle method
+```
+1. constructor() - 생성자 | 제일먼저 실행됨
+2. componentDidMount() - render() 다음으로 실행
+3. 실행순서: constructor() -> render() -> componentDidMount() 
+
+
+componentDidMount - 컴포넌트가 로딩되고나서 바로 한 번만 호출된다.
+componentDidUpdate() - 컴포넌트가 갱신되면서 재랜더링된 후에 바로 호출된다.
+componentWillUnmount() - 컴포넌트가 파기되기 전에 호출된다.
+
+static getDerivedStateFromProps 
+- static 클래스 메서드로 컴포넌트가 생성될 때와 컴포넌트가 새 props를 전달받을 때 모두 호출된다.
+- 새로운 props와 가장 최근의 state를 인수로 전달받아서 하나의 객체를 반환단다. 
+- 객체의 데이터는 컴포넌트의 상태로 갱신된다.
+
+shouldComponentUpdate - Boolean을 반환하며 컴포넌트의 랜더링을 할 것인지 경정할 수 있다.
+```
