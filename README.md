@@ -73,3 +73,14 @@ static getDerivedStateFromProps
 
 shouldComponentUpdate - Boolean을 반환하며 컴포넌트의 랜더링을 할 것인지 경정할 수 있다.
 ```
+---
+# 0409
+
+## ScrollView 컴포넌트
+```
+ScrollView 플랫폼을 감싸는 것으로 스크롤이 가능한 View 컴포넌트이다.
+
+[속성]
+keyboardShouldPersistTaps : always = 키보드가 열려 있으면 닫아서 UI 가 onPress 이벤트를 모두 처리하게 한다.
+
+```
