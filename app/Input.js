@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 
-class Input extends Component {
-    render() {
-        return(
-            <View style={styles.inputContainer}>
-                <TextInput 
-                    style={styles.input}
-                    placeholder='What needs to be done?'
-                    placeholderTextColor='#CACACA'
-                    selectionColor='#666666'/>
-            </View>
-        )
-    }
-}
+const Input = ({ inputValue, inputChange }) => (
+  <View style={styles.inputContainer}>  
+      <TextInput 
+          style={styles.input}
+          placeholder='What needs to be done?'
+          placeholderTextColor='#CACACA'
+          selectionColor='#666666'
+          onChangeText={inputChange} />
+  </View>
+)
 
 const styles = StyleSheet.create({
     inputContainer: {

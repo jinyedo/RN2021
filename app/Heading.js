@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 
-class Heading extends Component {
-    render() {
-        return(
-            <View style={styles.header}>
-                <Text style={styles.headerText}>todos</Text>
-            </View>
-        )
-    }
-}
+const Heading = () => (
+    <View style={styles.header}>
+        <Text style={styles.headerText}>todos</Text>
+    </View>
+)
 
 const styles = StyleSheet.create({
     header: {
