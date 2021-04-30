@@ -11,6 +11,8 @@ import { View, ScrollView, StyleSheet } from 'react-native'
 import Heading from './Heading'
 import Input from './Input'
 import Button from './Button'
+import TodoList from './TodoList'
+import TabBar from './TabBar'
 
 let todoIndex = 0
 
@@ -22,11 +24,31 @@ class App extends Component {
       todos: [],
       type: 'All'
     }
+    this.submitTodo = this.submitTodo.bind(this)
+    this.toggleComplete = this.toggleComplete.bind(this)
+    this.deleteTodo = this.deleteTodo.bind(this)
+    this.setType = this.setType.bind(this)
   }
 
   inputChange(inputValue) {
     console.log('Input Value : ', inputValue)
     this.setState({ inputValue })
+  }
+
+  deleteTodo(todoIndex) {
+    let { todos } = this.state
+    todos = todos.filter((todo) => todo.todoIndex !== todoIndex)
+    this.setState({ todos })
+  }
+
+  toggleComplete(todoIndex) {
+    let todos = this.state.todos
+    todos.forEach((todo) => {
+      if (todo.todoIndex === todoIndex) {
+        todo.complete = !todo.complete
+      }
+    })
+    this.setState({ todos })
   }
 
   submitTodo() {
@@ -45,19 +67,26 @@ class App extends Component {
     })
   }
 
+  setType(type) {
+    this.setState({ type })
+  }
+
   render = () => {
-    const { inputValue } = this.state
+    const { todos, inputValue, type } = this.state
     return(
       <View style={styles.container}>
-        {/* keyboardShouldPersistTaps='always' - 키보드가 열려있으면 닫아서 UI가 onPress 이벤트를 모두 처리 */}
-        {/* <View> 와 <ScrollView> 모두 flex: 1 이 적용되어 있는데 이는 하위 컴포넌트<ScrollView>가 상위 컴포넌트<View> 영역을 모두 채우도록 해준다.*/}
         <ScrollView keyboardShouldPersistTaps='always' style={styles.content}>
           <Heading />
           <Input 
             inputValue={inputValue}
             inputChange={(text) => this.inputChange(text)} />
+            <TodoList 
+              toggleComplete={this.toggleComplete}
+              deleteTodo={this.deleteTodo}
+              todos={todos} />
           <Button submitTodo={this.submitTodo}/>
         </ScrollView>
+        <TabBar type={type} setType={this.setType} />
       </View>
     )
   }
