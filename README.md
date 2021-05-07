@@ -84,8 +84,6 @@ console.log(bar); // true
 ```
 
 ## Border Example
-![Screenshot_1620370194](https://user-images.githubusercontent.com/62417132/117409449-25b61f80-af4c-11eb-8a68-3742dcbc143c.png)
-
 ```
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -133,6 +131,9 @@ const styles = StyleSheet.create({
 
 export default Border;
 ```
+![캡처](https://user-images.githubusercontent.com/62417132/117409679-6877f780-af4c-11eb-83ae-f7a35bce971e.PNG)
+
+
 ---
 # 0430
 ## 스타일 적용 방법
