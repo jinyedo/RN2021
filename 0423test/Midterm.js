@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native'
 import { DataTest } from './DataTest';
  
 class Midterm extends Component {
@@ -13,13 +12,13 @@ class Midterm extends Component {
     }
 
     render() {
-        const foo = [1, 2, 3, 4, 5];
+        const {id, name} = this.state;
         return(
-            <View>
-                <DataTest id={this.state.id} name={this.state.name} foo={foo}>
-                    
-                </DataTest>
-            </View>
+            <DataTest
+                id={ id }
+                name={ name }
+                foo={[1, 2, 3, 4, 5]} 
+            />
         )
     }
 }

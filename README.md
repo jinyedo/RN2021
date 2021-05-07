@@ -1,3 +1,137 @@
+# 0507
+## 중간 평가에서 주목해야 할 부분
+```
+1. Class 형태의 component의 선언방법
+2. 함수 형태의 component의 선언방법
+3. state 설정 및 초기화 방법
+4. props의 개념 및 전달 경로
+5. state에 초기화된 값을 props로 전달하는 방법
+6. 일반 변수로 초기화 된 값을 props로 전달하는 방법
+7. 구조분해(비구조화) 할당(Destructuring Assignment)을 통한 변수명 재할당
+8. 필요한 component만 import하기
+9. props를 전달받아 사용하기
+10. index.js에서 App지정하기
+```
+
+## 구조 분해 할당
+```
+배열이나 객체의 속성을 해체하여, 그 값을 개별 변수에 담을 수 있게 하는 JavaScript 표현식이다.
+
+[ 객체에서 변수를 재할당하는 방법 ]
+const foobar = {
+    foo: 1000,
+    bar: 500
+}
+// foobar에 있는 foo property를 woo로 바꾸고 싶을 때
+
+1. 구조분해 할당 없이 변수명 재할당
+const woo = foobar.foo
+
+2. 구조분해 할당을 이용하는 방법
+const {foo:woo} = foobar;
+console.log(woo) // 1000
+console.log(foobar) // let basket = {foo:1000, bar:500}
+
+3. React에서 자주 사용되는 구조분해 할당
+this.state = {
+  foo: 100,
+  bar: 200
+}
+const {foo, bar} = this.state // 추후에 foo 나 bar로 사용 가능
+
+-------------------------------------------------------------
+
+let o = {p:42, q:true};
+var {p: foo, q: bar} = o;
+console.log(foo); // 42
+console.log(bar); // true
+```
+
+## 지원되는 컬러의 지정 형식
+```
+1. #rgb | #tgba | #rrggbb | #rrggbbaa
+
+2. rgb(숫자, 숫자, 숫자) | rgba(숫자, 숫자, 숫자, 알파값)
+
+3. hsl(색상, 채도, 명도) = 'hsl(216, 100%, 50%) | hsla(색상, 채도, 명도, 알파값) = 'hsla(216, 100%, 50%, 5)'
+
+4. 투명 배경 = 'transparent'
+
+5. CSS3 지정 색 이름(black, red, blue 등) = 'dodgerblue'
+
+
+- rgb는 빨간색 ,녹색, 파란색을 의미 
+- alpha는 투명도와 유사하다(0은 투명, 1은 선명)
+- hue은 360도로 구성된 색상환(color wheel)의 1도를 의미한다. 0은 빨강새그 120은 녹색, 240은 파란색
+- saturation은 색상의 강도이며 회색 음영인 0%에서 100%까지 사용할 수 있다.
+- lightness는 0%에서 100%까지의 값으로 0%는 검은색에 가까운 어두운색이고 100%는 흰색에 가까운 밝은색이다.
+
+```
+
+## border 속성 지정하기
+```
+컴포넌트 주위에 테두리를 더하는 것이 화면의 요소들을 구체적이며 실제로 느낄 수 있는 가장 확실항 방법이다.
+다수의 border 속성들이 있지만, 개념으로 보면 4개의 속성이 있다. 이 속성들은 컴포넌트 전체에 적용된다.
+
+[ borderColor & borderWidth(각 측면 테두리에 각각의 속성을 적용) ]
+- border"위치"Color ex)borderTopColor
+- border"위치"Width ex)borderTopWidth
+
+[ borderRadius(각 모서리에 적용) ]
+
+
+[ borderStyle(모든 모서리에 공통적으로 하나만 적용) ]
+```
+
+## Border Example
+```
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+class Border extends Component {
+    render() {
+        return(
+            <View style={styles.container}>
+                <Example style={{borderWidth: 1}}>
+                    <Text>borderWidth: 1</Text>
+                </Example>
+                <Example style={{borderWidth: 3, borderLeftWidth: 0}}>
+                    <Text>borderWidth: 3, borderLeftWidth: 0</Text>
+                </Example>
+                <Example style={{borderWidth: 3, borderLeftColor: 'red'}}>
+                    <Text>borderWidth: 3, borderLeftColor: 'red'</Text>
+                </Example>
+                <Example style={{borderLeftWidth: 3}}>
+                    <Text>borderLeftWidth: 3</Text>
+                </Example>
+                <Example style={{borderWidth: 1, borderStyle: 'dashed'}}>
+                    <Text>borderWidth: 1, borderStyle: 'dashed'</Text>
+                </Example>
+            </View>
+        );
+    }
+}
+
+const Example = (props) => (
+    <View style={[styles.example, props.style]}>
+        {props.children}
+    </View>
+);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'   
+    },
+    example: {
+        marginBottom: 15
+    }
+});
+
+export default Border;
+```
+---
 # 0430
 ## 스타일 적용 방법
 ```
@@ -77,28 +211,6 @@ import { styles } from './styles'
 <View style={styles.container}></View> // styles.js 파일에 정의된 styles.container 스타일 참조
 
 ```
-
-## 지원되는 컬러의 지정 형식
-```
-1. #rgb | #tgba | #rrggbb | #rrggbbaa
-
-2. rgb(숫자, 숫자, 숫자) | rgba(숫자, 숫자, 숫자, 알파값)
-
-3. hsl(색상, 채도, 명도) = 'hsl(216, 100%, 50%) | hsla(색상, 채도, 명도, 알파값) = 'hsla(216, 100%, 50%, 5)'
-
-4. 투명 배경 = 'transparent'
-
-5. CSS3 지정 색 이름(black, red, blue 등) = 'dodgerblue'
-
-
-- rgb는 빨간색 ,녹색, 파란색을 의미 
-- alpha는 투명도와 유사하다(0은 투명, 1은 선명)
-- hue은 360도로 구성된 색상환(color wheel)의 1도를 의미한다. 0은 빨강새그 120은 녹색, 240은 파란색
-- saturation은 색상의 강도이며 회색 음영인 0%에서 100%까지 사용할 수 있다.
-- lightness는 0%에서 100%까지의 값으로 0%는 검은색에 가까운 어두운색이고 100%는 흰색에 가까운 밝은색이다.
-
-```
-
 ## View 컴포넌트란
 ```
 View 컴포넌트는 다른 요소를 감싸고 View 컴포넌트 내에 UI 코드 블록을 만들 수 있다는 점에서 HTML의 div 태그와 유사하다.
@@ -143,10 +255,13 @@ console.log(a1); // 10
 console.log(a2); // 20
 console.log(rest_a); // { a3: 30, a4: 40 }
 ```
+
+---
 # 0416
 ```
 내용 없음
 ```
+
 ---
 # 0409
 ## ScrollView 컴포넌트
@@ -157,6 +272,7 @@ ScrollView 플랫폼을 감싸는 것으로 스크롤이 가능한 View 컴포�
 keyboardShouldPersistTaps : always = 키보드가 열려 있으면 닫아서 UI 가 onPress 이벤트를 모두 처리하게 한다.
 
 ```
+
 ---
 # 0402
 ### 컴포넌트 생명주기 - life cycle method
@@ -178,6 +294,7 @@ static getDerivedStateFromProps
 shouldComponentUpdate - Boolean을 반환하며 컴포넌트의 랜더링을 할 것인지 경정할 수 있다.
 ```
 ---
+
 # 0326
 ### props 사용하기
 ```
