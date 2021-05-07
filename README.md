@@ -84,6 +84,8 @@ console.log(bar); // true
 ```
 
 ## Border Example
+![Screenshot_1620370194](https://user-images.githubusercontent.com/62417132/117409449-25b61f80-af4c-11eb-8a68-3742dcbc143c.png)
+
 ```
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
