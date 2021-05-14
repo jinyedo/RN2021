@@ -131,9 +131,6 @@ const styles = StyleSheet.create({
 
 export default Border;
 ```
-![캡처](https://user-images.githubusercontent.com/62417132/117409679-6877f780-af4c-11eb-83ae-f7a35bce971e.PNG)
-
-
 ---
 # 0430
 ## 스타일 적용 방법
