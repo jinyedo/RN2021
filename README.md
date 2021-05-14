@@ -1,3 +1,227 @@
+# 0514
+## border 속성 지정하기
+```
+컴포넌트 주위에 테두리를 더하는 것이 화면의 요소들을 구체적이며 실제로 느낄 수 있는 가장 확실항 방법이다.
+다수의 border 속성들이 있지만, 개념으로 보면 4개의 속성이 있다. 이 속성들은 컴포넌트 전체에 적용된다.
+
+1. borderColor & 2. borderWidth(각 측면 테두리에 각각의 속성을 적용) ]
+- border"위치"Color ex)borderTopColor
+- border"위치"Width ex)borderTopWidth
+
+3. borderRadius(각 모서리에 적용) 
+
+
+4. borderStyle(모든 모서리에 공통적으로 하나만 적용) 
+
+
+- borderWidth 속성만 지정하면 기본적으로 아래 속성으로 지정된다.
+  - borderColor : 'black'
+  - borderStyle : 'solid'
+
+- borderWidth 와 borderColor가 컴포넌트 범위에 지정되면
+  => borderWidthLeft와 같이 좀 더 세부적으로 오버라이드애서 사용할 수 있다.
+
+- 스타일에서는 세부적인 속성이 일반적인 속성보다 우선순위가 높다.
+
+[ 참고 - borderStyle 속성은 'solid' 를 추천 ]
+borderStyle 속성값을 'dotted' or 'dashed' 로 지정하고 각 측면의 테두리 폭을 변경하면 오류가 발생한다.
+```
+
+## Border Example
+```
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+class Border extends Component {
+    render() {
+        return(
+            <View style={styles.container}>
+                <Example style={{borderWidth: 1}}>
+                    <Text>borderWidth: 1</Text>
+                </Example>
+                <Example style={{borderWidth: 3, borderLeftWidth: 0}}>
+                    <Text>borderWidth: 3, borderLeftWidth: 0</Text>
+                </Example>
+                <Example style={{borderWidth: 3, borderLeftColor: 'red'}}>
+                    <Text>borderWidth: 3, borderLeftColor: 'red'</Text>
+                </Example>
+                <Example style={{borderLeftWidth: 3}}>
+                    <Text>borderLeftWidth: 3</Text>
+                </Example>
+                <Example style={{borderWidth: 1, borderStyle: 'dashed'}}>
+                    <Text>borderWidth: 1, borderStyle: 'dashed'</Text>
+                </Example>
+            </View>
+        );
+    }
+}
+
+const Example = (props) => (
+    <View style={[styles.example, props.style]}>
+        {props.children}
+    </View>
+);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'   
+    },
+    example: {
+        marginBottom: 15
+    }
+});
+
+export default Border;
+```
+## borderRadius를 이용해서 테두리를 둥글게 만들기
+```
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+class BorderRadius extends Component {
+
+    render() {
+        return(
+            <View style={styles.container}>
+                // ex1) 네 곳의 모서리가 둥근 사각형
+                <Example style={{borderRadius: 20}}>
+                    <CenteredText>
+                        <Text>Example 1:{"\n"}4 Rounded Corners</Text>
+                    </CenteredText>
+                </Example>
+
+                // ex2) 오른쪽 두 모서리가 둥근 사각형
+                <Example style={{borderTopRightRadius: 60, borderBottomRightRadius: 60}}>
+                    <CenteredText>
+                        <Text>Example 2:{"\n"}D Shape</Text>
+                    </CenteredText>
+                </Example>
+
+                // ex3) 양 반대 편의 모서리가 둥근 사각형
+                <Example style={{borderTopLeftRadius: 30, borderBottomRightRadius: 30}}>
+                    <CenteredText>
+                        <Text>Example 3:{"\n"}Leaf Shape</Text>
+                    </CenteredText>
+                </Example>
+
+                // ex4) border radius가 각 측면의 길이의 반으로 지정된 사각형
+                <Example style={{borderRadius: 60}}>
+                    <CenteredText>
+                        <Text>Example 4:{"\n"}Circle Shape</Text>
+                    </CenteredText>
+                </Example>
+            </View>
+        )
+    }
+}
+
+const Example = (props) => (
+    <View style={[styles.example, props.style]}>{props.children}</View>
+)
+
+const CenteredText = (props) => ( // 중앙 정렬된 엘리먼트(text element)를 렌더링하는 재사용 가능한 컴포넌트
+    <Text style={[styles.centeredText, props.style]}>{props.children}</Text>
+)
+
+const styles = StyleSheet.create({
+    container: { // React Native는 flex를 사용하여 레이아웃을 제어
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',   
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: 75
+    },
+    example: {
+        width: 120,
+        height: 120,
+        marginLeft: 20,
+        marginBottom: 20,
+        backgroundColor: 'grey',
+        borderWidth: 2,
+        justifyContent: 'center'
+    },
+    centeredText: { // 텍스트 엘리먼트 내의 텍스트를 중앙 정렬하는 스타일
+        textAlign: 'center',
+        margin: 10
+    }
+});
+
+export default BorderRadius;
+----------------------------------
+- 기본적으로 Text 컴포넌트는 부모 컴포넌트의 배경색을 상속한다. 
+- Text 컴포넌트의 bounding box(기본적인 영역)는 사각형이기 때문에 배경이 둥근 테두리와 겹치게 된다. 
+- margin 속성을 이용해서 이 문제를 해결할 수도 있지만
+- centerText 스타일에 backgroundColor: 'transparent'를 추가해 이 문제를 해결할 수도 있다. 
+```
+
+## 프로필 카드에 border 속성 적용하기
+```
+import React, { Component } from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+
+export default class Profile extends Component {
+  render() {
+    return(
+      <View style={styles.container}>
+        <View style={styles.cardContainer}> 
+          <View style={styles.cardImageContainer}>
+            <Image style={styles.cardImage} source={require("./user.png")}/>
+          </View>
+        </View>
+      </View>
+    );
+  }
+}
+
+// 여러 곳에서 사용할 경우를 대비해서 프로필카드의 색상을 변수에 정의함
+const profileCardColor = 'dodgerblue';
+
+const styles = StyleSheet.create({
+  // 가장 바깥쪽 컴포넌트가 사용할 스타일
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  // 프로필 카드에 사용할 스타일
+  cardContainer: {
+    // 프로필 카드에 border 속성 추가하기
+    borderColor: 'black',
+    borderWidth: 3,
+    borderStyle: 'solid',
+    borderRadius: 20,
+    backgroundColor: profileCardColor,
+    width: 300,
+    height: 400
+  },
+  // 이미지 컨테이너는 120 x 120 크기의 정사각형 borderRadius 속성을 60(120의 반)으로 지정해서 원으로 나타남
+  cardImageContainer: {
+    backgroundColor: 'white',
+    borderWidth: 3,
+    borderColor: 'black',
+    width: 120,
+    height: 120,
+    borderRadius: 60
+  },
+  // 이미지에 적용한 스타일
+  cardImage: {
+    width: 80,
+    height: 80
+  }
+});
+```
+## margin과 padding 지정하기
+```
+margin 스타일을 이용해서 각 컴포넌트 사이의 위치를 상대적으로 정의할 수 있다.
+padding 스타일을 이용하면 컴포넌트의 테두리로부터 컴포넌트의 상대 위치를 지정할 수 있다.
+```
+
+## 컴포넌트에 다양한 마진 적용하기
+
+---
 # 0507
 ## 중간 평가에서 주목해야 할 부분
 ```
@@ -66,70 +290,6 @@ console.log(bar); // true
 - saturation은 색상의 강도이며 회색 음영인 0%에서 100%까지 사용할 수 있다.
 - lightness는 0%에서 100%까지의 값으로 0%는 검은색에 가까운 어두운색이고 100%는 흰색에 가까운 밝은색이다.
 
-```
-
-## border 속성 지정하기
-```
-컴포넌트 주위에 테두리를 더하는 것이 화면의 요소들을 구체적이며 실제로 느낄 수 있는 가장 확실항 방법이다.
-다수의 border 속성들이 있지만, 개념으로 보면 4개의 속성이 있다. 이 속성들은 컴포넌트 전체에 적용된다.
-
-[ borderColor & borderWidth(각 측면 테두리에 각각의 속성을 적용) ]
-- border"위치"Color ex)borderTopColor
-- border"위치"Width ex)borderTopWidth
-
-[ borderRadius(각 모서리에 적용) ]
-
-
-[ borderStyle(모든 모서리에 공통적으로 하나만 적용) ]
-```
-
-## Border Example
-```
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-class Border extends Component {
-    render() {
-        return(
-            <View style={styles.container}>
-                <Example style={{borderWidth: 1}}>
-                    <Text>borderWidth: 1</Text>
-                </Example>
-                <Example style={{borderWidth: 3, borderLeftWidth: 0}}>
-                    <Text>borderWidth: 3, borderLeftWidth: 0</Text>
-                </Example>
-                <Example style={{borderWidth: 3, borderLeftColor: 'red'}}>
-                    <Text>borderWidth: 3, borderLeftColor: 'red'</Text>
-                </Example>
-                <Example style={{borderLeftWidth: 3}}>
-                    <Text>borderLeftWidth: 3</Text>
-                </Example>
-                <Example style={{borderWidth: 1, borderStyle: 'dashed'}}>
-                    <Text>borderWidth: 1, borderStyle: 'dashed'</Text>
-                </Example>
-            </View>
-        );
-    }
-}
-
-const Example = (props) => (
-    <View style={[styles.example, props.style]}>
-        {props.children}
-    </View>
-);
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'   
-    },
-    example: {
-        marginBottom: 15
-    }
-});
-
-export default Border;
 ```
 ---
 # 0430
