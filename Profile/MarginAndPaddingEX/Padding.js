@@ -5,30 +5,27 @@ class Padding extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <View style={styles.exampleContainer}>
-                    <Example style={{}}>    
-                        <CenteredText>A</CenteredText>
-                    </Example>
-                </View>
-
-                <View style={styles.exampleContainer}>
-                    <Example style={{paddingTop: 50}}>    
-                        <CenteredText>B</CenteredText>
-                    </Example>
-                </View>
-
-                <View style={styles.exampleContainer}>
-                    <Example style={{paddingTop: 50, paddingLeft: 10}}>    
-                        <CenteredText>C</CenteredText>
-                    </Example>
-                </View>
-                
-                <View style={styles.exampleContainer}>
-                    <Example style={{paddingLeft: -10, paddingTop: -10}}>    
-                        <CenteredText>D</CenteredText>
-                    </Example>
-                </View>
+            <View style={styles.exampleContainer}>
+               <Example style={{}}>    
+                   <CenteredText>A</CenteredText>
+                </Example>
             </View>
+            <View style={styles.exampleContainer}>
+                <Example style={{paddingTop: 10}}>    
+                    <CenteredText>B</CenteredText>
+                </Example>
+            </View>
+            <View style={styles.exampleContainer}>
+                <Example style={{paddingTop: 10, paddingLeft: 10}}>    
+                    <CenteredText>C</CenteredText>
+                </Example>
+            </View>
+            <View style={styles.exampleContainer}>
+                <Example style={{paddingLeft: -10, paddingTop: -10}}>    
+                    <CenteredText>D</CenteredText>
+                </Example>
+            </View>
+        </View>
         )
     }
 }

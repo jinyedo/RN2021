@@ -1,3 +1,28 @@
+# 0521
+
+## Platform에 따라 style 지정하기
+```
+// Platform import 하기
+import { StyleSheet, Platform } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+    // Platform 으로 fontFamily 지정하기
+    ...Platform.select({
+      ios: {
+        fontFamily: 'American Typewriter'
+      },
+      android: {
+        fontFamily: 'monospace'
+      }
+    })
+  },
+```
+---
 # 0514
 ## border 속성 지정하기
 ```
@@ -218,9 +243,6 @@ const styles = StyleSheet.create({
 margin 스타일을 이용해서 각 컴포넌트 사이의 위치를 상대적으로 정의할 수 있다.
 padding 스타일을 이용하면 컴포넌트의 테두리로부터 컴포넌트의 상대 위치를 지정할 수 있다.
 ```
-
-## 컴포넌트에 다양한 마진 적용하기
-
 ---
 # 0507
 ## 중간 평가에서 주목해야 할 부분

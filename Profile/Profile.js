@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View, Text, Platform } from 'react-native';
 
 export default class Profile extends Component {
   render() {
@@ -8,6 +8,17 @@ export default class Profile extends Component {
         <View style={styles.cardContainer}> 
           <View style={styles.cardImageContainer}>
             <Image style={styles.cardImage} source={require("./user.png")}/>
+          </View>
+          <View>
+            <Text style={styles.cardName}>John Doe</Text>
+          </View>
+          <View style={styles.cardOccupationContainer}>
+            <Text style={styles.cardOccupation}>React Native Developer</Text>
+          </View>
+          <View>
+            <Text style={styles.cardDescription}>
+              John is a really great JavaScript developer. He loves using JS to build React Native applications for IOS and Android.
+            </Text>
           </View>
         </View>
       </View>
@@ -50,5 +61,44 @@ const styles = StyleSheet.create({
   cardImage: {
     width: 80,
     height: 80
+  },
+  cardName: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginTop: 30,
+    textShadowRadius: 3,
+    ...Platform.select({
+      ios: {
+        fontFamily: 'American Typewriter'
+      },
+      android: {
+        fontFamily: 'monospace',
+        textShadowColor: 'red',
+        textShadowOffset: {
+          height: 2,
+          width: 2
+        },
+      }
+    })
+  },
+  cardOccupationContainer: {
+    borderColor: 'black',
+    borderWidth: 3,
+    borderTopWidth: 0,
+    borderRightWidth: 0,
+    borderLeftWidth: 0
+  },
+  cardOccupation: {
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10
+  },
+  cardDescription: {
+    fontStyle: 'italic',
+    marginTop: 10,
+    marginRight: 40,
+    marginLeft: 40,
+    marginBottom: 10
   }
 });
