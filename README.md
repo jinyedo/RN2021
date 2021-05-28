@@ -1,5 +1,24 @@
-# 0521
+# 0528
+## React Navigation
+https://github.com/jinyedo/NaviApp
 
+## expo cli
+```
+장점
+- 배포의 용이성
+- Android/X-code 가 없이 본인의 휴대폰으로 테스트 가능
+
+단점
+- java, kotlin, object-C, Swift 작성 불가, 이 언어의 원시 모듈 사용 불가
+- 빌드 파일의 크기가 크다. (규모가 크고 기능이 맣은 앱 개발에 부적합)
+- 블루투스 이용 불가
+
+설치하기 : npm install -g expo-cli (-g 옵션은 global옵션이니 반드시 사용해야 한다.)
+설치 확인: expo --version
+프로젝트 만들기 : expo init "프로젝트명"
+```
+
+# 0521
 ## Platform에 따라 style 지정하기
 ```
 // Platform import 하기
