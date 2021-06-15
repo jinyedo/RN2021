@@ -1,3 +1,29 @@
+# 0604
+## Redux
+```
+- 리덕스는 자바스크립트 앱을 위한 예측 가능한 state 컨테이너로 정의한다.
+- 앱이 단 하나밖에 없는 전역 상태의 객체이다.
+- 이 전역 state객체는 리액트 네이티브 컴포넌트에서 props로 전달된다.
+- 리덕스 state의 데이터가 변경되면, 변경된 새 데이터가 전체 앱의 props로 전달한다.
+- 리덕스는 앱의 state를 모두 store라는 곳으로 이동시켜 데이터 관간리를 편리하게 한다.
+- 리덕스는 리액트의 context라는 기능을 이용해서 동작한다.
+- context는 전역 state를 만들고 관리하는 매커니즘이다.
+```
+
+## context를 이용해서 앱의 전역 상태 관리하기
+```
+- context는 전역변수를 만드는 React API이다.
+- context를 전달받는 컴포넌트는 context를 만드는 컴포넌트의 자식 컴포넌트여야 한다.
+- 일반적으로 데이터를 전달하면 컴포넌트 구조의 단계별로 props를 전달하지만
+  -> context를 이용하면 props를 사용할 필요가 없다.
+  -> 왜냐하면 전역 객체이기 때문에 앱 전체에서 context를 참조할 수 있기 때문이다.
+```
+
+## 리덕스 관련 의존성 라이브러리 설치
+```
+npm install --save redux react-redux
+```
+---
 # 0528
 ## React Navigation
 https://github.com/jinyedo/NaviApp
